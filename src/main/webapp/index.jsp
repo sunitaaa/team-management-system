@@ -14,4 +14,5 @@
     <body>
         <c:redirect url="/login"></c:redirect>
     </body>
+    <p>Modified</p>
 </html>
