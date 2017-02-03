@@ -6,16 +6,24 @@ import com.f1soft.team.management.system.entity.Player;
 import com.f1soft.team.management.system.repository.PlayerRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author sunita.joshi
  */
-@Repository
+@Component
 public class PlayerDaoImpl implements  PlayerDao{
-    @Autowired
+    
     private PlayerRepository playerRepository;
+    @Autowired
+    public PlayerDaoImpl(PlayerRepository playerRepository){
+        this.playerRepository = playerRepository;
+    }
+    
+    
+    
 
     @Override
     public void addPlayer(Player player) {

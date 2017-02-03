@@ -6,6 +6,7 @@ import com.f1soft.team.management.system.entity.Admin;
 import com.f1soft.team.management.system.repository.AdminRepository;
 import com.f1soft.team.managment.system.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author sunita.joshi
  */
-@Service
-@Transactional
+@Component
 public class AdminServiceImpl implements  AdminService{
     @Autowired
     private AdminRepository adminRepository;

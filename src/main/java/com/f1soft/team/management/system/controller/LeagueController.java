@@ -5,6 +5,7 @@ import com.f1soft.team.management.system.entity.League;
 import com.f1soft.team.management.system.request.dto.LoginRequestDTO;
 
 import com.f1soft.team.managment.system.service.LeagueService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,10 +30,12 @@ public class LeagueController {
 
     @Autowired
     private LeagueService leagueService;
-    
+
+    @Autowired
+    private HttpSession httpSession;
 
     @RequestMapping(value = "/league", method = RequestMethod.GET)
-    public ModelAndView displayLeaguePage(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public ModelAndView displayLeaguePage(HttpServletRequest httpServletRequest) {
         ModelAndView model = new ModelAndView();
         LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
         model.addObject("loginRequestDTO", loginRequestDTO);
@@ -49,34 +52,22 @@ public class LeagueController {
         return model;
     }
 
-    
-    
-    @RequestMapping(value = "/league/add/process" ,method = RequestMethod.POST)
-    public String addingLeague(@Valid League league, BindingResult result, ModelMap map){
+    @RequestMapping(value = "/league/add/process", method = RequestMethod.POST)
+    public String addingLeague(@Valid League league, BindingResult result, ModelMap map) {
         // for validation
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "validation";
-        }
-        else{
-            String message="League was succesfully added";
-            leagueService.addLeague(league);
+        } else {
+            String message = "League was succesfully added"; 
+            league.setCreatedById(Long.valueOf(httpSession.getAttribute("adminId").toString()));
+            leagueService.addLeague(league); 
             map.addAttribute("league", new League());
             return "addLeague";
         }
-        
-    }
-//    @RequestMapping(value = "/league/add/process", method = RequestMethod.POST)
-//    public ModelAndView addingLeague(@ModelAttribute League league) {
-//        ModelAndView modelAndView = new ModelAndView("addLeague");
-//        System.out.println("admin role " + httpSession.getAttribute("role"));
-//        System.out.println("admin id " + httpSession.getAttribute("adminId"));
-//        System.out.println("league obj:: :" + league);
-//        leagueService.addLeague(league);
-//        String message = "League was successfully added.";
-//        modelAndView.addObject("league", new League());
-//        return modelAndView;
-//    }
 
+    }
+
+    
     
     //<-----UPDATE LEAGUELIST------>
     @RequestMapping(value = "/league/list", method = RequestMethod.GET)
@@ -84,7 +75,15 @@ public class LeagueController {
         try {
             System.out.println("called:::");
             ModelAndView modelAndView = new ModelAndView();
-            List<League> leagues = leagueService.getLeagues();
+            List<League> leagues = new ArrayList<>();
+            if (httpSession.getAttribute("role").equals('S')) {
+                leagues = leagueService.getLeagues();
+
+            } else if (httpSession.getAttribute("role").equals('A')) {
+                leagues = leagueService.getLeagues(Long.valueOf(httpSession.getAttribute("adminId").toString()));
+
+            } else {
+            }
             System.out.println("league" + leagues.size());
             //object lai liyara view ma send garne add object le garxcxa
 
@@ -99,7 +98,6 @@ public class LeagueController {
         return new ModelAndView("home");
     }
 
-    
     // <-------DELETE LEAGUE LIST--------->
     @RequestMapping(value = "/league/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editLeaguePage(@PathVariable Long id) {
@@ -126,12 +124,29 @@ public class LeagueController {
             } else {
                 String message = "Error while updating league";
             }
-            String message = "League was successfully edited.";
-            List<League> leagues = leagueService.getLeagues();
+            
+            List<League> leagues = new ArrayList<>();
+            if (httpSession.getAttribute("role").equals('S')) {
+                leagues = leagueService.getLeagues();
+
+            } else if (httpSession.getAttribute("role").equals('A')) {
+                leagues = leagueService.getLeagues(Long.valueOf(httpSession.getAttribute("adminId").toString()));
+
+            } 
+            String message="League was succesfully edited";
             modelAndView.addObject("leagues", leagues);
             modelAndView.setViewName("listLeague");
-            //modelAndView.addObject("message", message);
             return modelAndView;
+            
+            
+            
+            
+//            String message = "League was successfully edited.";
+//            List<League> leagues = leagueService.getLeagues();
+//            modelAndView.addObject("leagues", leagues);
+//            modelAndView.setViewName("listLeague");
+//            //modelAndView.addObject("message", message);
+//            return modelAndView;
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ModelAndView("home");
@@ -145,10 +160,28 @@ public class LeagueController {
         leagueService.deleteLeague(id);
         String message = "LEague was successfully deleted.";
         modelAndView.addObject("message", message);
-        List<League> leagues = leagueService.getLeagues();
-        System.out.println("leagues" + leagues.size());
-        modelAndView.addObject("leagues", leagues);
-        modelAndView.setViewName("listLeague");
-        return modelAndView;
+         List<League> leagues = new ArrayList<>();
+            if (httpSession.getAttribute("role").equals('S')) {
+                leagues = leagueService.getLeagues();
+
+            } else if (httpSession.getAttribute("role").equals('A')) {
+                leagues = leagueService.getLeagues(Long.valueOf(httpSession.getAttribute("adminId").toString()));
+
+            } 
+           
+            modelAndView.addObject("leagues", leagues);
+            modelAndView.setViewName("listLeague");
+            return modelAndView;
+            
+            
+            
+            
+//            String message = "League was successfully edited.";
+//            List<League> leagues = leagueService.getLeagues();
+//            modelAndView.addObject("leagues", leagues);
+//            modelAndView.setViewName("listLeague");
+//            //modelAndView.addObject("message", message);
+//            return modelAndView;
+        }
     }
-}
+

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -34,6 +36,11 @@ public class Team implements Serializable {
     @NotEmpty
     @Column(name = "teamManager")
     private String teamManager;
+    
+    
+ 
+    @Column(name = "createdById")
+    private Long createdById;
 
     public Long getTeamId() {
         return teamId;
@@ -66,5 +73,19 @@ public class Team implements Serializable {
     public void setTeamManager(String teamManager) {
         this.teamManager = teamManager;
     }
+
+    public Long getCreatedById() {
+        return createdById;
+    }
+
+    public void setCreatedById(Long createdById) {
+        this.createdById = createdById;
+    }
+
+    
+    
+   
+
+    
 
 }

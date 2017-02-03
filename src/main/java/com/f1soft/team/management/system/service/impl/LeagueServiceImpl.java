@@ -1,24 +1,25 @@
-
 package com.f1soft.team.management.system.service.impl;
 
 import com.f1soft.team.management.system.dao.LeagueDao;
 import com.f1soft.team.management.system.entity.League;
+import com.f1soft.team.management.system.repository.LeagueRepository;
 import com.f1soft.team.managment.system.service.LeagueService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author sunita.joshi
  */
+@Component
+public class LeagueServiceImpl implements LeagueService {
 
-@Service
-@Transactional
-public class LeagueServiceImpl implements LeagueService{
     @Autowired
     private LeagueDao leagueDao;
+
+    @Autowired
+    private LeagueRepository leagueRepository;
 
     @Override
     public void addLeague(League league) {
@@ -27,7 +28,7 @@ public class LeagueServiceImpl implements LeagueService{
 
     @Override
     public List<League> getLeagues() {
-       return leagueDao.getLeagues();
+        return leagueDao.getLeagues();
     }
 
     @Override
@@ -42,7 +43,12 @@ public class LeagueServiceImpl implements LeagueService{
 
     @Override
     public void deleteLeague(Long id) {
-       leagueDao.deleteLeague(id);
+        leagueDao.deleteLeague(id);
     }
-    
+
+    @Override
+    public List<League> getLeagues(long id) {
+        return leagueRepository.findByCreatedById(id);
+    }
+
 }

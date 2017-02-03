@@ -13,6 +13,8 @@ import java.util.List;
      void addTeam(Team team);
 
      List<Team> getTeams();
+     
+      List<Team> getTeams(long  id);
 
      Team getTeam(Long id);
 

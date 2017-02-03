@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -22,22 +24,34 @@ public class Admin  implements Serializable{
     private Long adminId;
     
     @NotNull
-    @Column(name = "firstName")
+    
+    @Column(name = "createdById" )
+    private Long createdById;
+    
+    @NotNull
+    @Length(max=50)
+    @NotEmpty(message = "Please enter your firstname")
+    @Column(name = "firstName" )
     private String firstName;
     
     @NotNull
+    @Length(max = 50)
+    @NotEmpty(message = "Please enter your lastname")
     @Column(name = "lastName")
     private String lastName;
     
     @NotNull
+    @NotEmpty(message = "please enter your email")
     @Column(name = "email")
     private String email;
     
     @NotNull
+    @NotEmpty(message = "Please enter your password")
     @Column(name = "password")
     private String password;
       
     @NotNull
+    @NotEmpty(message = "Please select a  role")
     @Column(name = "roles")
     private Character roles;
 

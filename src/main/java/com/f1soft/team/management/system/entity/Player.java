@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -21,6 +23,12 @@ public class Player implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long playerId;
+    
+   
+   
+   @Column(name = "createdById")
+    private Long createdById;
+    
     
     @NotEmpty
     @Column(name = "firstName")
@@ -48,6 +56,14 @@ public class Player implements Serializable{
 
     public void setPlayerId(Long playerId) {
         this.playerId = playerId;
+    }
+
+    public Long getCreatedById() {
+        return createdById;
+    }
+
+    public void setCreatedById(Long createdById) {
+        this.createdById = createdById;
     }
 
     public String getFirstName() {
@@ -89,6 +105,9 @@ public class Player implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+
+   
+   
     
     
     

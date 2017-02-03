@@ -14,11 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
  * @author sunita.joshi
  */
 @Component
-@Transactional
+
 public class AdminDaoImpl implements AdminDao{
+
+    private AdminRepository adminRepository;
     
     @Autowired
-    private AdminRepository adminRepository;
+    public  AdminDaoImpl(AdminRepository adminRepository){
+        this.adminRepository= adminRepository;
+    }
     
     @Override
     public List<Admin> findAll() {

@@ -30,8 +30,8 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView displayLogin(HttpServletRequest httpServletRequest,
-            HttpSession httpSession,
-            HttpServletResponse httpServletResponse) {
+            HttpSession httpSession
+    ) {
         ModelAndView model = new ModelAndView();
         Object attribute = httpSession.getAttribute("adminId");
         if (attribute != null) {
@@ -59,11 +59,11 @@ public class LoginController {
             if (LoginValidator.checkPassword(loginRequestDTO.getPassword(), admin.getPassword())) {
                 httpServletRequest.setAttribute("logged in user", loginRequestDTO.getEmail());
 
-   // checking for super admin and admin
-//                httpSession.setAttribute("adminId", admin.getAdminId());
-//                httpSession.setAttribute("role", admin.getRoles());
+                // checking for super admin and admin
+                httpSession.setAttribute("adminId", admin.getAdminId());
+                httpSession.setAttribute("role", admin.getRoles());
                 //to remove all the data from the session 
-             //httpSession.invalidate();
+                //httpSession.invalidate();
                 System.out.println("valid user");
 
                 httpSession.setAttribute("adminId", admin.getAdminId());
@@ -72,13 +72,13 @@ public class LoginController {
             } else {
                 //model.addObject("loginRequestDTO", loginRequestDTO);
 
-                model.setViewName("error");
+               model.setViewName("error");
 
             }
         } else {
-           // model.addObject("loginRequestDTO", loginRequestDTO);
+            // model.addObject("loginRequestDTO", loginRequestDTO);
 
-            model.setViewName("error");
+          model.setViewName("error");
         }
 
         return model;

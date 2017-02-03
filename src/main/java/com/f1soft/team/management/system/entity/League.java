@@ -1,15 +1,12 @@
-
 package com.f1soft.team.management.system.entity;
 
 import java.io.Serializable;
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -18,22 +15,23 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "league")
-public class League  implements Serializable{
+public class League implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long leagueId;
-    
+
     @Column(name = "createdById")
-    private Long  createdById;
-    
+    private Long createdById;
+
     @NotEmpty
     @Column(name = "leagueName")
     private String leagueName;
-    
+
     @NotEmpty
     @Column(name = "countryName")
     private String countryName;
-    
+
     @NotEmpty
     @Column(name = "leagueManager")
     private String leagueManager;
@@ -78,8 +76,4 @@ public class League  implements Serializable{
         this.leagueManager = leagueManager;
     }
 
-    
-  
-    
-    
 }

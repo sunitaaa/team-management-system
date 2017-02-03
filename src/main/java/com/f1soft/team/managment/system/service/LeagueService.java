@@ -14,6 +14,8 @@ public interface LeagueService {
 
     List<League> getLeagues();
 
+    List<League> getLeagues(long id);
+
     League getLeague(Long id);
 
     void updateLeague(League league);

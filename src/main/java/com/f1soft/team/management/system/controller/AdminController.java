@@ -4,6 +4,7 @@ import com.f1soft.team.management.system.entity.Admin;
 import com.f1soft.team.management.system.entity.Team;
 import com.f1soft.team.management.system.request.dto.LoginRequestDTO;
 import com.f1soft.team.management.system.request.dto.RegistrationRequestDTO;
+import com.f1soft.team.management.system.utility.Bcrypt;
 import com.f1soft.team.managment.system.service.AdminService;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.mysql.jdbc.Util;
@@ -32,7 +33,7 @@ public class AdminController {
     private Admin admin;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView displayLogin(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public ModelAndView displayLogin(HttpServletRequest httpServletRequest) {
         ModelAndView model = new ModelAndView();
         RegistrationRequestDTO registrationRequestDTO = new RegistrationRequestDTO();
         model.addObject("registrationRequestDTO", registrationRequestDTO);
@@ -51,8 +52,7 @@ public class AdminController {
     @RequestMapping(value = "/addAdmin/process", method = RequestMethod.POST)
     public String addAdminPage(@ModelAttribute Admin admin ) {
         ModelAndView modelAndView = new ModelAndView("login");
-        
-        
+        admin.setPassword(Bcrypt.hashpw(admin.getPassword(), Bcrypt.gensalt()));
         adminService.addAdmin(admin);
         modelAndView.addObject("admin", new Admin());
         modelAndView.setViewName("login");

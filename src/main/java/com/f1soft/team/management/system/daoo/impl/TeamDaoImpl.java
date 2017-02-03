@@ -5,27 +5,24 @@ import com.f1soft.team.management.system.entity.Team;
 import com.f1soft.team.management.system.repository.TeamRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author sunita.joshi
  */
-@Component
+@Repository
 public class TeamDaoImpl implements TeamDao {
 
-   
-    private TeamRepository teamRepository;
-    
+    private final TeamRepository teamRepository;
+
     //making repository constructor autowired
-     @Autowired
-     public  TeamDaoImpl(TeamRepository teamRepository){
-         this.teamRepository=teamRepository;
-        
+    @Autowired
+    public TeamDaoImpl(TeamRepository teamRepository) {
+        this.teamRepository = teamRepository;
+
     }
-   
-    
+
     @Override
     public void addTeam(Team team) {
         try {
@@ -43,16 +40,15 @@ public class TeamDaoImpl implements TeamDao {
     @Override
     public Team getTeam(Long id) {
         return teamRepository.findOne(id);
-        
-       
+
     }
 
     @Override
-    public void deleteTeam(Long id) {   
+    public void deleteTeam(Long id) {
         Team team = getTeam(id);
-        if(team!=null){
+        if (team != null) {
             teamRepository.delete(team);
-            
+
         }
     }
 
@@ -65,7 +61,5 @@ public class TeamDaoImpl implements TeamDao {
     public Team findById(Long teamId) {
         return teamRepository.findOne(teamId);
     }
-
-    
 
 }

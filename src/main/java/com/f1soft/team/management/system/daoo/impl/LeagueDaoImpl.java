@@ -6,6 +6,7 @@ import com.f1soft.team.management.system.entity.League;
 import com.f1soft.team.management.system.repository.LeagueRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,10 +14,14 @@ import org.springframework.stereotype.Repository;
  * @author sunita.joshi
  */
 
-@Repository
+@Component
 public class LeagueDaoImpl implements LeagueDao{
-    @Autowired
+  
     private LeagueRepository leagueRepository;
+    @Autowired
+    public LeagueDaoImpl(LeagueRepository leagueRepository){
+        this.leagueRepository= leagueRepository;
+    }
 
     @Override
     public void addLeague(League league) {

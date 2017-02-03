@@ -37,9 +37,7 @@ public class DataSourceConfig {@Bean(name = "dataSource")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(getDataSource());
-
         entityManagerFactoryBean.setPackagesToScan("com.f1soft.team.management.system.entity");
-
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactoryBean.setJpaProperties(getHibernateProperties());

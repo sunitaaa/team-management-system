@@ -12,15 +12,19 @@ import java.util.List;
 public interface PlayerService {
 
     
-      void addPlayer(Player player);
+     void addPlayer(Player player);
 
      List<Player> getPlayers();
+     
+     List<Player> getPlayers(long  id);
 
      Player getPlayer(Long id);
 
      void updatePlayer(Player player);
 
      void deletePlayer(Long id);
+
+     Player findCreatedById(Long createdById);
     
    
 }
