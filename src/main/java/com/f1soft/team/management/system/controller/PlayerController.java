@@ -57,6 +57,7 @@ public class PlayerController {
     public String addingPlayer(@Valid Player player, BindingResult result, ModelMap map) {
         if (result.hasErrors()) {
             return "validation";
+            
         } else {
 
             String message = "Player " + player.getFirstName() + " registered successfully";
