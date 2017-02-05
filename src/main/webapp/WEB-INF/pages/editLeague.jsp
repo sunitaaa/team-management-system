@@ -24,6 +24,8 @@
             <form:input id="leagueName" name="leagueName" path="leagueName" /><br>
 
             <input type="submit" value="Save" /> 
+            <br><br>
+             <div style="color: red">${error}</div>
            
 
         </form:form>

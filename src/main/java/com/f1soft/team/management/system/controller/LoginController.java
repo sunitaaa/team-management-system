@@ -57,6 +57,8 @@ public class LoginController {
             @ModelAttribute("loginRequestDTO") @Valid LoginRequestDTO loginRequestDTO, BindingResult bindingResult) {
         ModelAndView model = new ModelAndView();
         if (bindingResult.hasErrors()) {
+            
+         model.addObject("error", "Invalid Details");
          model.setViewName("login");
         }
         Admin admin = adminService.findAdminInfoByEmail(loginRequestDTO.getEmail());
@@ -77,13 +79,15 @@ public class LoginController {
             } else {
                 //model.addObject("loginRequestDTO", loginRequestDTO);
 
-                model.setViewName("error");
+//                model.setViewName("error");
+                model.addObject("error", "Invalid Credentials!!!!! ");
 
             }
         } else {
             // model.addObject("loginRequestDTO", loginRequestDTO);
 
-            model.setViewName("error");
+//            model.setViewName("error");
+               model.addObject("error", "Invalid Credentials");
         }
 
         return model;

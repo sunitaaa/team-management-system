@@ -5,12 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <style>
-            .error {
-                color: #ff0000;
-                font-style: italic;
-            }
-        </style> 
+       
 
     </head>
     <body>
@@ -34,6 +29,9 @@
                 <br><br>
 
                 <input type="submit" value="Submit" />
+                <br><br>
+                
+                <div style="color: red">${error}</div>
 
         </form:form>
     </body>

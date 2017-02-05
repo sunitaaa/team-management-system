@@ -36,9 +36,7 @@ public class Team implements Serializable {
     @NotEmpty
     @Column(name = "teamManager")
     private String teamManager;
-    
-    
- 
+  
     @Column(name = "createdById")
     private Long createdById;
 

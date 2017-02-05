@@ -52,6 +52,7 @@ public class AdminController {
     @RequestMapping(value = "/addAdmin/process", method = RequestMethod.POST)
     public String addAdminPage(@ModelAttribute Admin admin ) {
         ModelAndView modelAndView = new ModelAndView("login");
+        // to decrypt password
         admin.setPassword(Bcrypt.hashpw(admin.getPassword(), Bcrypt.gensalt()));
         adminService.addAdmin(admin);
         modelAndView.addObject("admin", new Admin());

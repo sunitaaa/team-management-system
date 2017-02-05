@@ -54,9 +54,12 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/player/add/process", method = RequestMethod.POST)
-    public String addingPlayer(@Valid Player player, BindingResult result, ModelMap map) {
+    public ModelAndView addingPlayer(@Valid Player player, BindingResult result) {
+        ModelAndView modelAndView = new ModelAndView();
         if (result.hasErrors()) {
-            return "validation";
+            modelAndView.addObject("error", "fields cannot be blank");
+            modelAndView.setViewName("addPlayer");
+           
             
         } else {
 
@@ -64,13 +67,15 @@ public class PlayerController {
             player.setCreatedById(Long.valueOf(httpSession.getAttribute("adminId").toString()));
 
             playerService.addPlayer(player);
+            modelAndView.addObject("error", "Fields cannot be blank");
+            modelAndView.setViewName("addPlayer");
             //player- key 
             //new player- value i.e object
-            map.addAttribute("player", new Player());
-            map.addAttribute("message", message);
-            return "addPlayer";
+//            map.addAttribute("player", new Player());
+//            map.addAttribute("message", message);
+           
         }
-
+ return  modelAndView;
     }
 
     @RequestMapping(value = "/player/list", method = RequestMethod.GET)

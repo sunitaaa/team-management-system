@@ -24,6 +24,9 @@
 
             <input type="submit" value="Add" /> 
             <input type="reset" value="reset">
+            <br>
+            <br>
+             <div style="color: red">${error}</div>
 
         </form:form>
             <br/>
