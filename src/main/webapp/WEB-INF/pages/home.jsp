@@ -1,8 +1,4 @@
-<%-- 
-    Document   : home
-    Created on : Jan 29, 2017, 2:30:49 AM
-    Author     : sunita.joshi
---%>
+s
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
