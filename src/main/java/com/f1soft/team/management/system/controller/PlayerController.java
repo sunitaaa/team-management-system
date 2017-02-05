@@ -67,7 +67,8 @@ public class PlayerController {
             player.setCreatedById(Long.valueOf(httpSession.getAttribute("adminId").toString()));
 
             playerService.addPlayer(player);
-            modelAndView.addObject("error", "Fields cannot be blank");
+            //modelAndView.addObject("error", "Fields cannot be blank");
+            modelAndView.addObject("player", new Player());
             modelAndView.setViewName("addPlayer");
             //player- key 
             //new player- value i.e object
@@ -75,7 +76,7 @@ public class PlayerController {
 //            map.addAttribute("message", message);
            
         }
- return  modelAndView;
+         return  modelAndView;
     }
 
     @RequestMapping(value = "/player/list", method = RequestMethod.GET)

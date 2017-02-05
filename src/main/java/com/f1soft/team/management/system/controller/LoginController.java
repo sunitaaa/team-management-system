@@ -58,7 +58,8 @@ public class LoginController {
         ModelAndView model = new ModelAndView();
         if (bindingResult.hasErrors()) {
             
-         model.addObject("error", "Invalid Details");
+         model.addObject("error", "Login Failed!!!!"
+                 + "<br>  Reason Bad Credentials...");
          model.setViewName("login");
         }
         Admin admin = adminService.findAdminInfoByEmail(loginRequestDTO.getEmail());
@@ -80,14 +81,16 @@ public class LoginController {
                 //model.addObject("loginRequestDTO", loginRequestDTO);
 
 //                model.setViewName("error");
-                model.addObject("error", "Invalid Credentials!!!!! ");
+                 model.addObject("error", "Login Failed!!!!"
+                 + "Reason Bad Credentials...");
 
             }
         } else {
             // model.addObject("loginRequestDTO", loginRequestDTO);
 
 //            model.setViewName("error");
-               model.addObject("error", "Invalid Credentials");
+                model.addObject("error", "Login Failed!!!!"
+                 + "Reason Bad Credentials...");
         }
 
         return model;

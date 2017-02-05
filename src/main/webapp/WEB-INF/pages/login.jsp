@@ -10,6 +10,9 @@
     </head>
     <body>
         <h1>Login Form</h1>
+        
+         <div style="color: red">${error}</div>
+         <br><br>
 
         <form:form id="loginForm" method="post" action="login" modelAttribute="loginRequestDTO">
 
@@ -31,7 +34,7 @@
                 <input type="submit" value="Submit" />
                 <br><br>
                 
-                <div style="color: red">${error}</div>
+<!--                <div style="color: red">${error}</div>-->
 
         </form:form>
     </body>

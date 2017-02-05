@@ -52,7 +52,7 @@ public class TeamController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logOutPage() {
         ModelAndView modelAndView = new ModelAndView();
-        httpSession.invalidate();
+       // httpSession.invalidate();
         LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
         modelAndView.addObject("loginRequestDTO", loginRequestDTO);
         modelAndView.setViewName("login");
@@ -84,11 +84,9 @@ public class TeamController {
 
             //modelAndView.addObject("message", "Dear " + team.getPlayerName() + " , your Registration completed successfully");
             teamService.addTeam(team);
-            modelAndView.addObject("error", "Fields cannot be blank");
+           
+            modelAndView.addObject("team", new Team());
             modelAndView.setViewName("addTeam");
-//            map.addAttribute("team", new Team());
-//            map.addAttribute("message", message);
-//            return "addTeam";
 
         }
        return modelAndView;
@@ -98,7 +96,7 @@ public class TeamController {
     public ModelAndView listOfTeams() {
         System.out.println("called:::");
         ModelAndView modelAndView = new ModelAndView("list");
-        //List<Team> teams = teamService.getTeams();
+        
 
         List<Team> teams = new ArrayList<>();
         if (httpSession.getAttribute("role").equals('S')) {

@@ -60,7 +60,7 @@ public class LeagueController {
         ModelAndView modelAndView = new ModelAndView();
         if (result.hasErrors()) {
             System.out.println("called");
-            //map.addAttribute("error", "Please fill all the fields");
+           
             modelAndView.setViewName("addLeague");
             modelAndView.addObject("error", "Please fiil the fields");
         } else {
@@ -70,8 +70,7 @@ public class LeagueController {
             modelAndView.addObject("league", new League());
             modelAndView.setViewName("addLeague");
 
-            // map.addAttribute("league", new League());
-            // return "addLeague";
+            
         }
         return modelAndView;
     }
@@ -99,7 +98,7 @@ public class LeagueController {
             modelAndView.addObject("error", "Please check the required fields");
             modelAndView.setViewName("listLeague");
             //redirect garxa kun page ma jane vanera 
-            // modelAndView.setViewName("listLeague");
+            
             return modelAndView;
         } catch (Exception e) {
             e.printStackTrace();
