@@ -7,8 +7,10 @@ import com.f1soft.team.managment.system.service.AdminService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,8 +54,11 @@ public class LoginController {
     public ModelAndView executeLogin(HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse,
             HttpSession httpSession,
-            @ModelAttribute("loginRequestDTO") LoginRequestDTO loginRequestDTO) {
+            @ModelAttribute("loginRequestDTO") @Valid LoginRequestDTO loginRequestDTO, BindingResult bindingResult) {
         ModelAndView model = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+         model.setViewName("login");
+        }
         Admin admin = adminService.findAdminInfoByEmail(loginRequestDTO.getEmail());
         if (admin != null) {
             if (LoginValidator.checkPassword(loginRequestDTO.getPassword(), admin.getPassword())) {
@@ -72,13 +77,13 @@ public class LoginController {
             } else {
                 //model.addObject("loginRequestDTO", loginRequestDTO);
 
-               model.setViewName("error");
+                model.setViewName("error");
 
             }
         } else {
             // model.addObject("loginRequestDTO", loginRequestDTO);
 
-          model.setViewName("error");
+            model.setViewName("error");
         }
 
         return model;

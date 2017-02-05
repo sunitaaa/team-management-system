@@ -22,36 +22,26 @@ public class Admin  implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long adminId;
-    
-    @NotNull
-    
+   
     @Column(name = "createdById" )
     private Long createdById;
     
-    @NotNull
-    @Length(max=50)
-    @NotEmpty(message = "Please enter your firstname")
     @Column(name = "firstName" )
     private String firstName;
     
-    @NotNull
-    @Length(max = 50)
-    @NotEmpty(message = "Please enter your lastname")
+ 
     @Column(name = "lastName")
     private String lastName;
     
-    @NotNull
-    @NotEmpty(message = "please enter your email")
+    
     @Column(name = "email")
     private String email;
     
-    @NotNull
-    @NotEmpty(message = "Please enter your password")
+    
     @Column(name = "password")
     private String password;
       
-    @NotNull
-    @NotEmpty(message = "Please select a  role")
+   
     @Column(name = "roles")
     private Character roles;
 
@@ -61,6 +51,14 @@ public class Admin  implements Serializable{
 
     public void setAdminId(Long adminId) {
         this.adminId = adminId;
+    }
+
+    public Long getCreatedById() {
+        return createdById;
+    }
+
+    public void setCreatedById(Long createdById) {
+        this.createdById = createdById;
     }
 
     public String getFirstName() {
@@ -102,7 +100,8 @@ public class Admin  implements Serializable{
     public void setRoles(Character roles) {
         this.roles = roles;
     }
-    
+
+   
   
 
     
